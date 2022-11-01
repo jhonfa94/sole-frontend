@@ -1,9 +1,9 @@
 import ApplicationLogo from '@/components/ApplicationLogo'
 import AuthCard from '@/components/AuthCard'
+import AuthValidationErrors from '@/components/AuthValidationErrors'
 import Button from '@/components/Button'
 import GuestLayout from '@/components/Layouts/GuestLayout'
 import Input from '@/components/Input'
-import InputError from '@/components/InputError'
 import Label from '@/components/Label'
 import Link from 'next/link'
 import { useAuth } from '@/hooks/auth'
@@ -18,13 +18,13 @@ const Register = () => {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [passwordConfirmation, setPasswordConfirmation] = useState('')
+    const [password_confirmation, setPasswordConfirmation] = useState('')
     const [errors, setErrors] = useState([])
 
     const submitForm = event => {
         event.preventDefault()
 
-        register({ name, email, password, password_confirmation: passwordConfirmation, setErrors })
+        register({ name, email, password, password_confirmation, setErrors })
     }
 
     return (
@@ -38,10 +38,13 @@ const Register = () => {
                     </Link>
                 }>
 
+                {/* Validation Errors */}
+                <AuthValidationErrors className="mb-4" errors={errors} />
+
                 <form onSubmit={submitForm}>
                     {/* Name */}
                     <div>
-                        <Label htmlFor="name">Name</Label>
+                        <Label htmlFor="name">Nombre</Label>
 
                         <Input
                             id="name"
@@ -52,13 +55,11 @@ const Register = () => {
                             required
                             autoFocus
                         />
-
-                        <InputError messages={errors.name} className="mt-2" />
                     </div>
 
                     {/* Email Address */}
                     <div className="mt-4">
-                        <Label htmlFor="email">Email</Label>
+                        <Label htmlFor="email">Correo Electrónico</Label>
 
                         <Input
                             id="email"
@@ -68,13 +69,11 @@ const Register = () => {
                             onChange={event => setEmail(event.target.value)}
                             required
                         />
-
-                        <InputError messages={errors.email} className="mt-2" />
                     </div>
 
                     {/* Password */}
                     <div className="mt-4">
-                        <Label htmlFor="password">Password</Label>
+                        <Label htmlFor="password">Contraseña</Label>
 
                         <Input
                             id="password"
@@ -85,38 +84,34 @@ const Register = () => {
                             required
                             autoComplete="new-password"
                         />
-
-                        <InputError messages={errors.password} className="mt-2" />
                     </div>
 
                     {/* Confirm Password */}
                     <div className="mt-4">
-                        <Label htmlFor="passwordConfirmation">
-                            Confirm Password
+                        <Label htmlFor="password_confirmation">
+                            Confirmar Contraseña
                         </Label>
 
                         <Input
-                            id="passwordConfirmation"
+                            id="password_confirmation"
                             type="password"
-                            value={passwordConfirmation}
+                            value={password_confirmation}
                             className="block mt-1 w-full"
                             onChange={event =>
                                 setPasswordConfirmation(event.target.value)
                             }
                             required
                         />
-
-                        <InputError messages={errors.password_confirmation} className="mt-2" />
                     </div>
 
                     <div className="flex items-center justify-end mt-4">
                         <Link href="/login">
                             <a className="underline text-sm text-gray-600 hover:text-gray-900">
-                                Already registered?
+                                Ya estás registrado?
                             </a>
                         </Link>
 
-                        <Button className="ml-4">Register</Button>
+                        <Button className="ml-4">Registrar</Button>
                     </div>
                 </form>
             </AuthCard>

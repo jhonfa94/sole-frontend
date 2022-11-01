@@ -37,6 +37,26 @@ const Navigation = ({ user }) => {
                                 active={router.pathname === '/dashboard'}>
                                 Dashboard
                             </NavLink>
+                            <NavLink
+                                href="/genres"
+                                active={router.pathname === '/genres'}>
+                                Géneros Literarios
+                            </NavLink>
+                            <NavLink
+                                href="/publishers"
+                                active={router.pathname === '/publishers'}>
+                                Editoriales
+                            </NavLink>
+                            <NavLink
+                                href="/authors"
+                                active={router.pathname === '/authors'}>
+                                Autores
+                            </NavLink>
+                            <NavLink
+                                href="/books"
+                                active={router.pathname === '/books'}>
+                                Libros
+                            </NavLink>
                         </div>
                     </div>
 
@@ -66,7 +86,7 @@ const Navigation = ({ user }) => {
 
                             {/* Authentication */}
                             <DropdownButton onClick={logout}>
-                                Logout
+                                Cerrar sesión
                             </DropdownButton>
                         </Dropdown>
                     </div>
